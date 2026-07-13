@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-const SidebarItem = ({ title, path }) => {
+const SidebarItem = ({ item }) => {
     return (
         <li>
-            <NavLink to={path} end={path === "/dashboard"}>
-                {title}
+            <NavLink to={item.path} end={item.path === "/dashboard"}>
+                {item.title}
             </NavLink>
         </li>
     );

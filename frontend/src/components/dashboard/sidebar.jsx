@@ -5,8 +5,10 @@ import { sidebarItems } from "./sidebarConfig";
 
 import { logoutUser } from "../../api/authAPI";
 import { clearAuthSession } from "../../utils/helpers";
+import { useAuth } from "../../context/authProvider";
 
 const Sidebar = () => {
+    const { setUser } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -16,6 +18,7 @@ const Sidebar = () => {
             // Ignore API errors and clear local session.
         } finally {
             clearAuthSession();
+            setUser(null);
             navigate("/login");
         }
     };

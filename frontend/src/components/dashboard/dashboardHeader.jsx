@@ -1,37 +1,36 @@
 import { useLocation } from "react-router-dom";
 
 import { useAuth } from "../../context/useAuth";
-
-const pageTitles = {
-    "/dashboard": "Dashboard",
-
-    "/dashboard/transactions": "Transactions",
-
-    "/dashboard/analytics": "Analytics",
-};
+import { sidebarItems } from "./sidebarConfig";
 
 const DashboardHeader = () => {
-    const location = useLocation();
-
+    const { pathname } = useLocation();
     const { user } = useAuth();
 
+    const currentPage = sidebarItems.find(
+        (item) => item.path === pathname
+    );
+
+    const currentDate = new Date().toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+    });
+
     return (
-        <header>
+        <header className="dashboard-header">
+            <div className="header-left">
+                <h1>{currentPage?.title ?? "Dashboard"}</h1>
 
-            <div>
-
-                <h1>
-                    {pageTitles[location.pathname]}
-                </h1>
-
-                <p>
-                    Welcome,
-                    {" "}
-                    {user?.name}
-                </p>
-
+                <p>{currentDate}</p>
             </div>
 
+            <div className="header-right">
+                <h3>{user?.name}</h3>
+
+                <p>{user?.email}</p>
+            </div>
         </header>
     );
 };
