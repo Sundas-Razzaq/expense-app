@@ -111,3 +111,59 @@ export const deleteTransaction = asyncHandler(async (req, res) => {
         )
     );
 });
+
+//get transaction summary
+export const getTransactionSummary = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const summary = await Transaction.aggregate([
+        {
+            $match: {
+                user: userId,
+            },
+        },
+        {
+            $group: {
+                _id: "$type",
+                total: {
+                    $sum: "$amount",
+                },
+            },
+        },
+    ]);
+
+    let totalIncome = 0;
+    let totalExpense = 0;
+
+    summary.forEach((item) => {
+        if (item._id === "income") {
+            totalIncome = item.total;
+        }
+
+        if (item._id === "expense") {
+            totalExpense = item.total;
+        }
+    });
+
+    const balance = totalIncome - totalExpense;
+
+    // Get latest 5 transactions
+    const recentTransactions = await Transaction.find({
+        user: userId,
+    })
+        .sort({ date: -1 })
+        .limit(5);
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+                totalIncome,
+                totalExpense,
+                balance,
+                recentTransactions,
+            },
+            "Transaction summary fetched successfully."
+        )
+    );
+});

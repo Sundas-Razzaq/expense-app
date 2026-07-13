@@ -6,6 +6,7 @@ import {
     getTransactionById,
     updateTransaction,
     deleteTransaction,
+    getTransactionsSummary,
 } from "../controllers/transactionController.js";
 
 import { authMiddleware } from "../middleware/authMiddleware.js";
@@ -14,16 +15,14 @@ import { transactionSchema } from "../validations/transactionValidation.js";
 
 const router = express.Router();
 
-// Create Transaction
 router.post("/", authMiddleware, validate(transactionSchema), createTransaction);
 
-// Get All Transactions
 router.get("/", authMiddleware, getTransactions);
 
-// Get Single Transaction
+router.get("/summary", authMiddleware, getTransactionSummary);
+
 router.get("/:id", authMiddleware, getTransactionById);
 
-// Update Transaction
 router.put(
     "/:id",
     authMiddleware,
@@ -33,7 +32,6 @@ router.put(
     )),
     updateTransaction
 );
-// Delete Transaction
 router.delete("/:id", authMiddleware, validate(transactionSchema), deleteTransaction);
 
 export default router;
