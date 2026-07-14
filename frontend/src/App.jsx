@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
+import Landing from "./pages/Landing";
+
 import LoginPage from "./pages/auth/login";
 import RegisterPage from "./pages/auth/register";
 import ForgotPasswordPage from "./pages/auth/forgotpass";
@@ -17,63 +19,47 @@ import { getStoredToken } from "./utils/helpers";
 
 const defaultRoute = getStoredToken()
   ? "/dashboard"
-  : "/login";
+  : "/";
 
 function App() {
   return (
     <Routes>
+      <Route path="/" element={<Landing />} />
+
       <Route
-        path="/"
-        element={
-          <Navigate
-            to={defaultRoute}
-            replace
-          />
-        }
+        path="/login" element={<LoginPage />}
       />
 
       <Route
-        path="/login"
-        element={<LoginPage />}
+        path="/register" element={<RegisterPage />}
       />
 
       <Route
-        path="/register"
-        element={<RegisterPage />}
+        path="/forgot-password" element={<ForgotPasswordPage />}
       />
 
       <Route
-        path="/forgot-password"
-        element={<ForgotPasswordPage />}
-      />
-
-      <Route
-        path="/reset-password/:token"
-        element={<PasswordResetPage />}
+        path="/reset-password/:token" element={<PasswordResetPage />}
       />
 
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
           <Route
-            path="/dashboard"
-            element={<DashboardHome />}
+            path="/dashboard" element={<DashboardHome />}
           />
 
           <Route
-            path="/dashboard/transactions"
-            element={<TransactionsPage />}
+            path="/dashboard/transactions" element={<TransactionsPage />}
           />
 
           <Route
-            path="/dashboard/analytics"
-            element={<AnalyticsPage />}
+            path="/dashboard/analytics" element={<AnalyticsPage />}
           />
         </Route>
       </Route>
 
       <Route
-        path="*"
-        element={
+        path="*" element={
           <Navigate
             to={defaultRoute}
             replace
