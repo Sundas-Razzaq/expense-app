@@ -6,6 +6,7 @@ import SummaryCards from "../../components/dashboard/summary/summaryCards";
 import RecentTransactions from "../../components/dashboard/transactions/recentTransaction";
 
 import { resolveErrorMessage } from "../../utils/helpers";
+import "../../styles/dashboard.css";
 
 const DashboardHome = () => {
     const [summary, setSummary] = useState(null);

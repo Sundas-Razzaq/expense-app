@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/authAPI.js";
 import { resolveErrorMessage, setAuthSession } from "../../utils/helpers.jsx";
-
+import "../../styles/auth.css";
 const initialForm = {
     name: "",
     email: "",

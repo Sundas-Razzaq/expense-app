@@ -11,6 +11,7 @@ import CategoryBreakdown from "../../components/dashboard/analytics/categoryBrea
 import MonthlyOverview from "../../components/dashboard/analytics/monthlyOverview";
 
 import { resolveErrorMessage } from "../../utils/helpers";
+import "../../styles/dashboard.css";
 
 const AnalyticsPage = () => {
     const [statistics, setStatistics] = useState(null);

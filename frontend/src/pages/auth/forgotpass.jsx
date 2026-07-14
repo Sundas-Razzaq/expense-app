@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { forgotPassword } from "../../api/authAPI.js";
 import { resolveErrorMessage } from "../../utils/helpers.jsx";
-
+import "../../styles/auth.css";
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");

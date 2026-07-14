@@ -12,6 +12,7 @@ import TransactionFilters from "../../components/dashboard/transactions/transact
 import TransactionTable from "../../components/dashboard/transactions/transactionTable";
 
 import { resolveErrorMessage } from "../../utils/helpers";
+import "../../styles/dashboard.css";
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([]);
