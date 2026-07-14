@@ -6,12 +6,15 @@ import {
     getTransactionById,
     updateTransaction,
     deleteTransaction,
-    getTransactionsSummary,
+    getTransactionSummary,
+    getCategoryAnalytics,
+    getMonthlyAnalytics,
+    getStatistics,
 } from "../controllers/transactionController.js";
 
-import { authMiddleware } from "../middleware/authMiddleware.js";
+import authMiddleware from "../middleware/authMiddleware.js";
 import validate from "../middleware/validate.js";
-import { transactionSchema } from "../validations/transactionValidation.js";
+import { transactionSchema } from "../validators/transactionValidation.js";
 
 const router = express.Router();
 
@@ -20,6 +23,15 @@ router.post("/", authMiddleware, validate(transactionSchema), createTransaction)
 router.get("/", authMiddleware, getTransactions);
 
 router.get("/summary", authMiddleware, getTransactionSummary);
+
+router.get(
+    "/analytics/category", authMiddleware, getCategoryAnalytics);
+
+router.get(
+    "/analytics/monthly", authMiddleware, getMonthlyAnalytics);
+
+router.get(
+    "/analytics/statistics", authMiddleware, getStatistics);
 
 router.get("/:id", authMiddleware, getTransactionById);
 
@@ -32,6 +44,6 @@ router.put(
     )),
     updateTransaction
 );
-router.delete("/:id", authMiddleware, validate(transactionSchema), deleteTransaction);
+router.delete("/:id", authMiddleware, deleteTransaction);
 
 export default router;

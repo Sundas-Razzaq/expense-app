@@ -5,10 +5,10 @@ import RegisterPage from "./pages/auth/register";
 import ForgotPasswordPage from "./pages/auth/forgotpass";
 import PasswordResetPage from "./pages/auth/passreset";
 
-import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardLayout from "./layout/dashboardLayout";
 
-import DashboardHome from "./pages/dashboard/DashboardHome";
-import TransactionsPage from "./pages/dashboard/TransactionsPage";
+import DashboardHome from "./pages/dashboard/dashboardHome";
+import TransactionsPage from "./pages/dashboard/transactionPage";
 import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
 
 import ProtectedRoute from "./routes/protectedRoute";

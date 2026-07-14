@@ -5,11 +5,17 @@ const TransactionTable = ({
     onEdit,
     onDelete,
 }) => {
-    if (transactions.length === 0) {
+    if (!transactions.length) {
         return (
-            <p>
-                No transactions found.
-            </p>
+            <section>
+                <h3>No Transactions Yet</h3>
+
+                <p>
+                    Add your first income or
+                    expense to start tracking
+                    your finances.
+                </p>
+            </section>
         );
     }
 
@@ -19,39 +25,26 @@ const TransactionTable = ({
             <thead>
 
                 <tr>
-
-                    <th>Title</th>
-
-                    <th>Category</th>
-
-                    <th>Type</th>
-
-                    <th>Amount</th>
-
                     <th>Date</th>
-
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
                     <th>Actions</th>
-
                 </tr>
 
             </thead>
 
             <tbody>
 
-                {transactions.map(
-                    (transaction) => (
-                        <TransactionRow
-                            key={transaction._id}
-                            transaction={
-                                transaction
-                            }
-                            onEdit={onEdit}
-                            onDelete={
-                                onDelete
-                            }
-                        />
-                    )
-                )}
+                {transactions.map((transaction) => (
+                    <TransactionRow
+                        key={transaction._id}
+                        transaction={transaction}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                    />
+                ))}
 
             </tbody>
 

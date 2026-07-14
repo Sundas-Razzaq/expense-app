@@ -5,7 +5,7 @@ import { sidebarItems } from "./sidebarConfig";
 
 import { logoutUser } from "../../api/authAPI";
 import { clearAuthSession } from "../../utils/helpers";
-import { useAuth } from "../../context/authProvider";
+import { useAuth } from "../../context/useAuth";
 
 const Sidebar = () => {
     const { setUser } = useAuth();
@@ -32,8 +32,7 @@ const Sidebar = () => {
                     {sidebarItems.map((item) => (
                         <SidebarItem
                             key={item.id}
-                            title={item.title}
-                            path={item.path}
+                            item={item}
                         />
                     ))}
                 </ul>

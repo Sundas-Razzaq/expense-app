@@ -1,23 +1,42 @@
-import SummaryCard from "./SummaryCard";
-
 const SummaryCards = ({ summary }) => {
     return (
-        <section className="summary-cards">
+        <section>
 
-            <SummaryCard
-                title="Balance"
-                amount={summary.balance}
-            />
+            <h2>Summary</h2>
 
-            <SummaryCard
-                title="Income"
-                amount={summary.totalIncome}
-            />
+            <div>
 
-            <SummaryCard
-                title="Expense"
-                amount={summary.totalExpense}
-            />
+                <p>
+                    Total Income
+                </p>
+
+                <strong>
+                    PKR {summary.totalIncome}
+                </strong>
+
+            </div>
+
+            <div>
+
+                <p>
+                    Total Expense
+                </p>
+
+                <strong>
+                    PKR {summary.totalExpense}
+                </strong>
+
+            </div>
+
+            <div>
+
+                <p>Balance</p>
+
+                <strong>
+                    PKR {summary.balance}
+                </strong>
+
+            </div>
 
         </section>
     );

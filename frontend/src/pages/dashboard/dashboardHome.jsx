@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { getTransactionSummary } from "../../api/transactionAPI";
+import { getTransactionSummary } from "../../api/analyticsAPI";
 
-import SummaryCards from "../../components/dashboard/summary/SummaryCards";
-import RecentTransactions from "../../components/dashboard/transactions/RecentTransactions";
+import SummaryCards from "../../components/dashboard/summary/summaryCards";
+import RecentTransactions from "../../components/dashboard/transactions/recentTransaction";
 
 import { resolveErrorMessage } from "../../utils/helpers";
 
@@ -15,9 +15,10 @@ const DashboardHome = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        const fetchDashboard = async () => {
+        const loadDashboard = async () => {
             try {
-                const response = await getTransactionSummary();
+                const response =
+                    await getTransactionSummary();
 
                 setSummary(response.data);
             } catch (error) {
@@ -27,29 +28,33 @@ const DashboardHome = () => {
             }
         };
 
-        fetchDashboard();
+        loadDashboard();
     }, []);
 
     if (loading) {
         return <p>Loading dashboard...</p>;
     }
 
-    if (error) {
-        return <p>{error}</p>;
-    }
-
-    if (!summary) {
-        return <p>No dashboard data found.</p>;
-    }
-
     return (
-        <section className="dashboard-home">
+        <section>
 
-            <SummaryCards summary={summary} />
+            <h1>Dashboard</h1>
 
-            <RecentTransactions
-                transactions={summary.recentTransactions}
-            />
+            {error && <p>{error}</p>}
+
+            {summary && (
+                <>
+                    <SummaryCards
+                        summary={summary}
+                    />
+
+                    <RecentTransactions
+                        transactions={
+                            summary.recentTransactions
+                        }
+                    />
+                </>
+            )}
 
         </section>
     );

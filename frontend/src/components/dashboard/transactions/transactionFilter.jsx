@@ -1,4 +1,9 @@
-const TransactionFilters = () => {
+const TransactionFilters = ({
+    search,
+    setSearch,
+    typeFilter,
+    setTypeFilter,
+}) => {
     return (
         <section>
 
@@ -6,12 +11,20 @@ const TransactionFilters = () => {
 
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search transactions..."
+                value={search}
+                onChange={(e) =>
+                    setSearch(e.target.value)
+                }
             />
 
-            <select>
-
-                <option>
+            <select
+                value={typeFilter}
+                onChange={(e) =>
+                    setTypeFilter(e.target.value)
+                }
+            >
+                <option value="all">
                     All Types
                 </option>
 
@@ -22,7 +35,6 @@ const TransactionFilters = () => {
                 <option value="expense">
                     Expense
                 </option>
-
             </select>
 
         </section>

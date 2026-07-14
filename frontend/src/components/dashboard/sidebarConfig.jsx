@@ -1,19 +1,19 @@
 export const sidebarItems = [
     {
         id: 1,
-        label: "Dashboard",
+        title: "Dashboard",
         path: "/dashboard",
         icon: null,
     },
     {
         id: 2,
-        label: "Transactions",
+        title: "Transactions",
         path: "/dashboard/transactions",
         icon: null,
     },
     {
         id: 3,
-        label: "Analytics",
+        title: "Analytics",
         path: "/dashboard/analytics",
         icon: null,
     },

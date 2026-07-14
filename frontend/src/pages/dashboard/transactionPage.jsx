@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
     getTransactions,
@@ -7,24 +7,33 @@ import {
     deleteTransaction,
 } from "../../api/transactionAPI";
 
-import TransactionForm from "../../components/dashboard/transactions/TransactionForm";
-import TransactionFilters from "../../components/dashboard/transactions/TransactionFilters";
-import TransactionTable from "../../components/dashboard/transactions/TransactionTable";
+import TransactionForm from "../../components/dashboard/transactions/transactionForm";
+import TransactionFilters from "../../components/dashboard/transactions/transactionFilter";
+import TransactionTable from "../../components/dashboard/transactions/transactionTable";
 
 import { resolveErrorMessage } from "../../utils/helpers";
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([]);
     const [editingTransaction, setEditingTransaction] = useState(null);
+
+    const [search, setSearch] = useState("");
+    const [typeFilter, setTypeFilter] = useState("all");
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     const loadTransactions = async () => {
         try {
+            setError("");
+
             const response = await getTransactions();
+
             setTransactions(response.data);
         } catch (error) {
             setError(resolveErrorMessage(error));
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -33,6 +42,8 @@ const TransactionsPage = () => {
 
         const initializePage = async () => {
             try {
+                setError("");
+
                 const response = await getTransactions();
 
                 if (!ignore) {
@@ -58,6 +69,8 @@ const TransactionsPage = () => {
 
     const handleSubmit = async (transaction) => {
         try {
+            setError("");
+
             if (editingTransaction) {
                 await updateTransaction(
                     editingTransaction._id,
@@ -77,19 +90,45 @@ const TransactionsPage = () => {
 
     const handleDelete = async (id) => {
         try {
+            setError("");
+
             await deleteTransaction(id);
+
+            if (editingTransaction?._id === id) {
+                setEditingTransaction(null);
+            }
+
             await loadTransactions();
         } catch (error) {
             setError(resolveErrorMessage(error));
         }
     };
 
+    const filteredTransactions = useMemo(() => {
+        return transactions.filter((transaction) => {
+            const matchesSearch =
+                transaction.title
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                transaction.category
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
+
+            const matchesType =
+                typeFilter === "all" ||
+                transaction.type === typeFilter;
+
+            return matchesSearch && matchesType;
+        });
+    }, [transactions, search, typeFilter]);
+
     if (loading) {
-        return <p>Loading...</p>;
+        return <p>Loading transactions...</p>;
     }
 
     return (
         <section>
+
             <h1>Transactions</h1>
 
             {error && <p>{error}</p>}
@@ -100,13 +139,19 @@ const TransactionsPage = () => {
                 onSubmit={handleSubmit}
             />
 
-            <TransactionFilters />
+            <TransactionFilters
+                search={search}
+                setSearch={setSearch}
+                typeFilter={typeFilter}
+                setTypeFilter={setTypeFilter}
+            />
 
             <TransactionTable
-                transactions={transactions}
+                transactions={filteredTransactions}
                 onEdit={setEditingTransaction}
                 onDelete={handleDelete}
             />
+
         </section>
     );
 };

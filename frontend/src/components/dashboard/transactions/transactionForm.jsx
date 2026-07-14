@@ -1,28 +1,43 @@
 import { useState } from "react";
 
+const getToday = () => new Date().toISOString().split("T")[0];
+
 const getInitialState = (transaction) => ({
     title: transaction?.title ?? "",
     amount: transaction?.amount ?? "",
     type: transaction?.type ?? "expense",
     category: transaction?.category ?? "",
     description: transaction?.description ?? "",
-    date: transaction?.date?.split("T")[0] ?? "",
+    date: transaction?.date
+        ? transaction.date.split("T")[0]
+        : getToday(),
 });
+
+const categories = [
+    "Salary",
+    "Food",
+    "Transport",
+    "Shopping",
+    "Bills",
+    "Entertainment",
+    "Health",
+    "Education",
+    "Other",
+];
 
 const TransactionForm = ({
     onSubmit,
     editingTransaction,
+    onCancel,
 }) => {
-    const [formData, setFormData] = useState(() =>
+    const [formData, setFormData] = useState(
         getInitialState(editingTransaction)
     );
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
+    const handleChange = ({ target }) => {
         setFormData((prev) => ({
             ...prev,
-            [name]: value,
+            [target.name]: target.value,
         }));
     };
 
@@ -38,12 +53,14 @@ const TransactionForm = ({
 
     return (
         <form onSubmit={handleSubmit}>
+
             <input
                 type="text"
                 name="title"
                 placeholder="Title"
                 value={formData.title}
                 onChange={handleChange}
+                required
             />
 
             <input
@@ -52,6 +69,9 @@ const TransactionForm = ({
                 placeholder="Amount"
                 value={formData.amount}
                 onChange={handleChange}
+                min="1"
+                step="0.01"
+                required
             />
 
             <select
@@ -68,13 +88,25 @@ const TransactionForm = ({
                 </option>
             </select>
 
-            <input
-                type="text"
+            <select
                 name="category"
-                placeholder="Category"
                 value={formData.category}
                 onChange={handleChange}
-            />
+                required
+            >
+                <option value="">
+                    Select Category
+                </option>
+
+                {categories.map((category) => (
+                    <option
+                        key={category}
+                        value={category}
+                    >
+                        {category}
+                    </option>
+                ))}
+            </select>
 
             <textarea
                 name="description"
@@ -95,6 +127,16 @@ const TransactionForm = ({
                     ? "Update Transaction"
                     : "Add Transaction"}
             </button>
+
+            {editingTransaction && (
+                <button
+                    type="button"
+                    onClick={onCancel}
+                >
+                    Cancel
+                </button>
+            )}
+
         </form>
     );
 };
