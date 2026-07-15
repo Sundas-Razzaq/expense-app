@@ -24,8 +24,11 @@ const Sidebar = () => {
     };
 
     return (
-        <aside>
-            <h2>Expense Tracker</h2>
+        <aside className="dashboard-sidebar">
+            <div className="dashboard-sidebar__brand">
+                <h2>Expense Tracker</h2>
+                <p>Simple, reliable finance tracking.</p>
+            </div>
 
             <nav>
                 <ul>
@@ -38,7 +41,7 @@ const Sidebar = () => {
                 </ul>
             </nav>
 
-            <button onClick={handleLogout}>
+            <button className="button button--ghost dashboard-sidebar__logout" onClick={handleLogout}>
                 Logout
             </button>
         </aside>

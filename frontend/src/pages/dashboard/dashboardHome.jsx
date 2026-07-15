@@ -4,6 +4,8 @@ import { getTransactionSummary } from "../../api/analyticsAPI";
 
 import SummaryCards from "../../components/dashboard/summary/summaryCards";
 import RecentTransactions from "../../components/dashboard/transactions/recentTransaction";
+import Loader from "../../components/common/loader";
+import EmptyState from "../../components/common/emptyState";
 
 import { resolveErrorMessage } from "../../utils/helpers";
 import "../../styles/dashboard.css";
@@ -33,30 +35,35 @@ const DashboardHome = () => {
     }, []);
 
     if (loading) {
-        return <p>Loading dashboard...</p>;
+        return (
+            <section className="dashboard-page">
+                <Loader label="Loading dashboard" />
+            </section>
+        );
     }
 
     return (
-        <section>
+        <section className="dashboard-page dashboard-stack">
+            <div>
+                <h1 className="dashboard-page__title">Dashboard</h1>
+                <p className="dashboard-page__description">
+                    Review your income, spending, and recent activity at a glance.
+                </p>
+            </div>
 
-            <h1>Dashboard</h1>
+            {error && <p className="auth-status auth-status--error">{error}</p>}
 
-            {error && <p>{error}</p>}
-
-            {summary && (
+            {summary ? (
                 <>
-                    <SummaryCards
-                        summary={summary}
-                    />
-
-                    <RecentTransactions
-                        transactions={
-                            summary.recentTransactions
-                        }
-                    />
+                    <SummaryCards summary={summary} />
+                    <RecentTransactions transactions={summary.recentTransactions} />
                 </>
+            ) : (
+                <EmptyState
+                    title="No dashboard data"
+                    description="Try again after transactions have been created."
+                />
             )}
-
         </section>
     );
 };

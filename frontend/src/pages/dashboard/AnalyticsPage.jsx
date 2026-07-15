@@ -9,9 +9,11 @@ import {
 import StatisticsCards from "../../components/dashboard/analytics/staticsCard";
 import CategoryBreakdown from "../../components/dashboard/analytics/categoryBreakdown";
 import MonthlyOverview from "../../components/dashboard/analytics/monthlyOverview";
+import Loader from "../../components/common/loader";
 
 import { resolveErrorMessage } from "../../utils/helpers";
 import "../../styles/dashboard.css";
+import "../../styles/analytics.css";
 
 const AnalyticsPage = () => {
     const [statistics, setStatistics] = useState(null);
@@ -64,30 +66,29 @@ const AnalyticsPage = () => {
     }, []);
 
     if (loading) {
-        return <p>Loading analytics...</p>;
+        return (
+            <section className="analytics-page">
+                <Loader label="Loading analytics" />
+            </section>
+        );
     }
 
     return (
-        <section>
+        <section className="analytics-page dashboard-stack">
+            <div>
+                <h1 className="dashboard-page__title">Analytics</h1>
+                <p className="dashboard-page__description">
+                    Monitor trends, categories, and monthly movement in one place.
+                </p>
+            </div>
 
-            <h1>Analytics</h1>
+            {error && <p className="auth-status auth-status--error">{error}</p>}
 
-            {error && <p>{error}</p>}
+            {statistics && <StatisticsCards statistics={statistics} />}
 
-            {statistics && (
-                <StatisticsCards
-                    statistics={statistics}
-                />
-            )}
+            <CategoryBreakdown categories={categories} />
 
-            <CategoryBreakdown
-                categories={categories}
-            />
-
-            <MonthlyOverview
-                monthlyData={monthlyData}
-            />
-
+            <MonthlyOverview monthlyData={monthlyData} />
         </section>
     );
 };

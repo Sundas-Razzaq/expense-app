@@ -37,29 +37,43 @@ const RegisterPage = () => {
     };
 
     return (
-        <main>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input id="name" name="name" type="text" value={form.name} onChange={handleChange} required />
+        <main className="auth-page">
+            <section className="auth-card">
+                <div className="auth-card__header">
+                    <p className="eyebrow">Create account</p>
+                    <h1>Register</h1>
+                    <p>Start tracking income and expenses with a polished dashboard.</p>
                 </div>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="email" value={form.email} onChange={handleChange} required />
+
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <div className="auth-field">
+                        <label htmlFor="name">Name</label>
+                        <input className="form-control" id="name" name="name" type="text" value={form.name} onChange={handleChange} required />
+                    </div>
+
+                    <div className="auth-field">
+                        <label htmlFor="email">Email</label>
+                        <input className="form-control" id="email" name="email" type="email" value={form.email} onChange={handleChange} required />
+                    </div>
+
+                    <div className="auth-field">
+                        <label htmlFor="password">Password</label>
+                        <input className="form-control" id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
+                    </div>
+
+                    {error ? <p className="auth-status auth-status--error">{error}</p> : null}
+
+                    <button className="button button--primary button--block" type="submit" disabled={loading}>
+                        {loading ? "Creating account..." : "Register"}
+                    </button>
+                </form>
+
+                <div className="auth-footer">
+                    <div className="auth-help-row">
+                        <Link className="auth-link" to="/login">Back to login</Link>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
-                </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Creating account..." : "Register"}
-                </button>
-            </form>
-            {error ? <p>{error}</p> : null}
-            <p>
-                <Link to="/login">Back to login</Link>
-            </p>
+            </section>
         </main>
     );
 };

@@ -1,3 +1,4 @@
+import EmptyState from "../../common/emptyState";
 import TransactionRow from "./TransactionRow";
 
 const TransactionTable = ({
@@ -7,48 +8,45 @@ const TransactionTable = ({
 }) => {
     if (!transactions.length) {
         return (
-            <section>
-                <h3>No Transactions Yet</h3>
-
-                <p>
-                    Add your first income or
-                    expense to start tracking
-                    your finances.
-                </p>
+            <section className="transaction-table-card">
+                <EmptyState
+                    title="No transactions yet"
+                    description="Add your first income or expense to start tracking your finances."
+                />
             </section>
         );
     }
 
     return (
-        <table>
+        <section className="transaction-table-card">
+            <h2>Transactions</h2>
 
-            <thead>
+            <div className="transaction-table-shell">
+                <table className="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-                <tr>
-                    <th>Date</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Actions</th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                {transactions.map((transaction) => (
-                    <TransactionRow
-                        key={transaction._id}
-                        transaction={transaction}
-                        onEdit={onEdit}
-                        onDelete={onDelete}
-                    />
-                ))}
-
-            </tbody>
-
-        </table>
+                    <tbody>
+                        {transactions.map((transaction) => (
+                            <TransactionRow
+                                key={transaction._id}
+                                transaction={transaction}
+                                onEdit={onEdit}
+                                onDelete={onDelete}
+                            />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </section>
     );
 };
 

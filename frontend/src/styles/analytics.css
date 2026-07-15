@@ -1,0 +1,139 @@
+.analytics-page {
+	gap: 20px;
+}
+
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.stats-card,
+.analytics-panel {
+	padding: 20px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	background: var(--color-surface);
+	box-shadow: var(--shadow-sm);
+}
+
+.stats-card {
+	display: grid;
+	gap: 10px;
+}
+
+.stats-card__label {
+	margin: 0;
+	color: var(--color-text-secondary);
+	font-size: 0.92rem;
+	font-weight: 600;
+}
+
+.stats-card__value {
+	margin: 0;
+	font-size: 1.4rem;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+}
+
+.stats-card__icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	display: grid;
+	place-items: center;
+	color: #fff;
+	background: var(--color-primary);
+}
+
+.stats-card__icon--income {
+	background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.stats-card__icon--expense {
+	background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.stats-card__icon--transactions {
+	background: linear-gradient(135deg, #4f46e5, #4338ca);
+}
+
+.analytics-panel + .analytics-panel {
+	margin-top: 4px;
+}
+
+.category-list__item,
+.analytics-table tbody tr {
+	transition: background-color var(--transition-fast);
+}
+
+.category-list__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 14px 16px;
+	border: 1px solid var(--color-border);
+	border-radius: 14px;
+	background: #fff;
+}
+
+.category-list__item strong,
+.analytics-table td strong {
+	color: var(--color-text);
+}
+
+.monthly-overview__table,
+.analytics-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	min-width: 640px;
+}
+
+.analytics-table thead th,
+.monthly-overview__table thead th {
+	position: sticky;
+	top: 0;
+	background: #f8fafc;
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-size: 0.8rem;
+	text-align: left;
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.analytics-table tbody td,
+.monthly-overview__table tbody td {
+	padding: 15px 16px;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.analytics-table tbody tr:hover,
+.monthly-overview__table tbody tr:hover {
+	background: rgba(79, 70, 229, 0.03);
+}
+
+.analytics-empty {
+	padding: 18px 0 0;
+	color: var(--color-text-secondary);
+}
+
+@media (max-width: 1200px) {
+	.stats-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.stats-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.category-list__item {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

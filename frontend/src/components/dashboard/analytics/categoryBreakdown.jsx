@@ -2,50 +2,27 @@ const CategoryBreakdown = ({
     categories,
 }) => {
     return (
-        <section>
-
-            <h2>
-                Category Breakdown
-            </h2>
+        <section className="analytics-panel">
+            <h2>Category Breakdown</h2>
 
             {categories.length === 0 ? (
-                <p>
-                    No expense data found.
-                </p>
+                <p className="analytics-empty">No expense data found.</p>
             ) : (
-                <ul>
+                <ul className="category-list">
+                    {categories.map((category) => (
+                        <li key={category._id} className="category-list__item">
+                            <div>
+                                <strong>{category._id}</strong>
+                                <p className="recent-transaction__meta">
+                                    {category.transactionCount} transactions
+                                </p>
+                            </div>
 
-                    {categories.map(
-                        (category) => (
-                            <li
-                                key={category._id}
-                            >
-                                <strong>
-                                    {
-                                        category._id
-                                    }
-                                </strong>
-
-                                {" - PKR "}
-
-                                {
-                                    category.totalAmount
-                                }
-
-                                {" ("}
-
-                                {
-                                    category.transactionCount
-                                }
-
-                                {" Transactions)"}
-                            </li>
-                        )
-                    )}
-
+                            <strong>PKR {Number(category.totalAmount).toLocaleString()}</strong>
+                        </li>
+                    ))}
                 </ul>
             )}
-
         </section>
     );
 };

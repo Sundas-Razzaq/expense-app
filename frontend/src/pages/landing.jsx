@@ -2,33 +2,35 @@ import { Link } from "react-router-dom";
 import "../styles/landing.css";
 const Landing = () => {
     return (
-        <main>
-            <section>
-                <div>
-                    <h1>Expense Tracker</h1>
+        <main className="landing-page">
+            <section className="landing-hero">
+                <div className="landing-copy">
+                    <p className="eyebrow">Expense Tracker</p>
+                    <h1>Clear money management for modern teams and individuals.</h1>
 
                     <p>
-                        Track your income, manage your expenses, and gain
-                        valuable insights into your spending habits with a
-                        simple and efficient personal finance tracker.
+                        Track income, control spending, and review performance in a dashboard that feels
+                        fast, calm, and built for everyday use.
                     </p>
 
-                    <div>
+                    <div className="landing-actions">
                         <Link to="/login">
-                            <button type="button">Login</button>
+                            <button className="button button--primary" type="button">Login</button>
                         </Link>
 
                         <Link to="/register">
-                            <button type="button">Register</button>
+                            <button className="button button--secondary" type="button">Register</button>
                         </Link>
                     </div>
                 </div>
 
-                <div>
-                    <img
-                        src="/landing-image.png"
-                        alt="Expense Tracker Illustration"
-                    />
+                <div className="landing-visual">
+                    <div className="landing-visual__frame">
+                        <img
+                            src="/landing-image.png"
+                            alt="Expense Tracker Illustration"
+                        />
+                    </div>
                 </div>
             </section>
         </main>

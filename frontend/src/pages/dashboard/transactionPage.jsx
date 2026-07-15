@@ -10,9 +10,11 @@ import {
 import TransactionForm from "../../components/dashboard/transactions/transactionForm";
 import TransactionFilters from "../../components/dashboard/transactions/transactionFilter";
 import TransactionTable from "../../components/dashboard/transactions/transactionTable";
+import Loader from "../../components/common/loader";
 
 import { resolveErrorMessage } from "../../utils/helpers";
 import "../../styles/dashboard.css";
+import "../../styles/transactions.css";
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([]);
@@ -124,15 +126,23 @@ const TransactionsPage = () => {
     }, [transactions, search, typeFilter]);
 
     if (loading) {
-        return <p>Loading transactions...</p>;
+        return (
+            <section className="transaction-page">
+                <Loader label="Loading transactions" />
+            </section>
+        );
     }
 
     return (
-        <section>
+        <section className="transaction-page dashboard-stack">
+            <div>
+                <h1 className="dashboard-page__title">Transactions</h1>
+                <p className="dashboard-page__description">
+                    Create, search, filter, and manage your records with a clean table layout.
+                </p>
+            </div>
 
-            <h1>Transactions</h1>
-
-            {error && <p>{error}</p>}
+            {error && <p className="auth-status auth-status--error">{error}</p>}
 
             <TransactionForm
                 key={editingTransaction?._id ?? "create"}
@@ -152,7 +162,6 @@ const TransactionsPage = () => {
                 onEdit={setEditingTransaction}
                 onDelete={handleDelete}
             />
-
         </section>
     );
 };

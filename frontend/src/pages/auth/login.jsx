@@ -36,25 +36,39 @@ const LoginPage = () => {
     };
 
     return (
-        <main>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="email" value={form.email} onChange={handleChange} required />
+        <main className="auth-page">
+            <section className="auth-card">
+                <div className="auth-card__header">
+                    <p className="eyebrow">Welcome back</p>
+                    <h1>Sign in</h1>
+                    <p>Access your expense dashboard, transactions, and analytics.</p>
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
+
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <div className="auth-field">
+                        <label htmlFor="email">Email</label>
+                        <input className="form-control" id="email" name="email" type="email" value={form.email} onChange={handleChange} required />
+                    </div>
+
+                    <div className="auth-field">
+                        <label htmlFor="password">Password</label>
+                        <input className="form-control" id="password" name="password" type="password" value={form.password} onChange={handleChange} required />
+                    </div>
+
+                    {error ? <p className="auth-status auth-status--error">{error}</p> : null}
+
+                    <button className="button button--primary button--block" type="submit" disabled={loading}>
+                        {loading ? "Signing in..." : "Login"}
+                    </button>
+                </form>
+
+                <div className="auth-footer">
+                    <div className="auth-help-row">
+                        <Link className="auth-link" to="/register">Create an account</Link>
+                        <Link className="auth-link" to="/forgot-password">Forgot password?</Link>
+                    </div>
                 </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Signing in..." : "Login"}
-                </button>
-            </form>
-            {error ? <p>{error}</p> : null}
-            <p>
-                <Link to="/register">Register</Link> | <Link to="/forgot-password">Forgot password</Link>
-            </p>
+            </section>
         </main>
     );
 };

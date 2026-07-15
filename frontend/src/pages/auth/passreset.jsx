@@ -37,26 +37,39 @@ const PasswordResetPage = () => {
     };
 
     return (
-        <main>
-            <h1>Reset Password</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="password">New password</label>
-                    <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+        <main className="auth-page">
+            <section className="auth-card">
+                <div className="auth-card__header">
+                    <p className="eyebrow">Secure your account</p>
+                    <h1>Reset password</h1>
+                    <p>Choose a new password to continue to your dashboard.</p>
                 </div>
-                <div>
-                    <label htmlFor="confirmPassword">Confirm password</label>
-                    <input id="confirmPassword" type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required />
+
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    <div className="auth-field">
+                        <label htmlFor="password">New password</label>
+                        <input className="form-control" id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
+                    </div>
+
+                    <div className="auth-field">
+                        <label htmlFor="confirmPassword">Confirm password</label>
+                        <input className="form-control" id="confirmPassword" type="password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} required />
+                    </div>
+
+                    {message ? <p className="auth-status auth-status--success">{message}</p> : null}
+                    {error ? <p className="auth-status auth-status--error">{error}</p> : null}
+
+                    <button className="button button--primary button--block" type="submit" disabled={loading}>
+                        {loading ? "Resetting..." : "Reset password"}
+                    </button>
+                </form>
+
+                <div className="auth-footer">
+                    <div className="auth-help-row">
+                        <Link className="auth-link" to="/login">Back to login</Link>
+                    </div>
                 </div>
-                <button type="submit" disabled={loading}>
-                    {loading ? "Resetting..." : "Reset password"}
-                </button>
-            </form>
-            {message ? <p>{message}</p> : null}
-            {error ? <p>{error}</p> : null}
-            <p>
-                <Link to="/login">Back to login</Link>
-            </p>
+            </section>
         </main>
     );
 };
