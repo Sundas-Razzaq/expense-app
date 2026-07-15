@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import AuthContext from "./AuthContext";
+import AuthContext from "./authcontext";
 
 import { getCurrentUser } from "../api/authAPI";
 import {
