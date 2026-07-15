@@ -1,6 +1,6 @@
-import Transaction from "../models/Transaction.js";
+import Transaction from "../models/transaction.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import ApiError from "../utils/apiError.js";
+import ApiError from "../utils/apierror.js";
 import ApiResponse from "../utils/apiResponse.js";
 
 // Create Transaction
