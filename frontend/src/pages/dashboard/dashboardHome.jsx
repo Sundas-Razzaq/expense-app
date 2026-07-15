@@ -45,7 +45,6 @@ const DashboardHome = () => {
     return (
         <section className="dashboard-page dashboard-stack">
             <div>
-                <h1 className="dashboard-page__title">Dashboard</h1>
                 <p className="dashboard-page__description">
                     Review your income, spending, and recent activity at a glance.
                 </p>

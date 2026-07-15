@@ -136,7 +136,6 @@ const TransactionsPage = () => {
     return (
         <section className="transaction-page dashboard-stack">
             <div>
-                <h1 className="dashboard-page__title">Transactions</h1>
                 <p className="dashboard-page__description">
                     Create, search, filter, and manage your records with a clean table layout.
                 </p>

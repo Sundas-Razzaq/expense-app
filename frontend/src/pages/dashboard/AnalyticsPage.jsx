@@ -76,7 +76,6 @@ const AnalyticsPage = () => {
     return (
         <section className="analytics-page dashboard-stack">
             <div>
-                <h1 className="dashboard-page__title">Analytics</h1>
                 <p className="dashboard-page__description">
                     Monitor trends, categories, and monthly movement in one place.
                 </p>

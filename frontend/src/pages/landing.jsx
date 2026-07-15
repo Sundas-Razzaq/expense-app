@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import expenseImage from "../assets/expense.png";
 import "../styles/landing.css";
 const Landing = () => {
     return (
@@ -6,7 +7,7 @@ const Landing = () => {
             <section className="landing-hero">
                 <div className="landing-copy">
                     <p className="eyebrow">Expense Tracker</p>
-                    <h1>Clear money management for modern teams and individuals.</h1>
+                    <h1>Clear money management for individuals.</h1>
 
                     <p>
                         Track income, control spending, and review performance in a dashboard that feels
@@ -27,7 +28,7 @@ const Landing = () => {
                 <div className="landing-visual">
                     <div className="landing-visual__frame">
                         <img
-                            src="/landing-image.png"
+                            src={expenseImage}
                             alt="Expense Tracker Illustration"
                         />
                     </div>
