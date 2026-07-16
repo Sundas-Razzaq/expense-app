@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import SidebarItem from "./SidebarItem";
+import SidebarItem from "./sidebarItem";
 import { sidebarItems } from "./sidebarConfig";
 
 import { logoutUser } from "../../api/authAPI";
