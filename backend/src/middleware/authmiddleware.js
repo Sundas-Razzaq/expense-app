@@ -3,7 +3,7 @@ import User from "../models/user.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/apierror.js";
 
-const authMiddleware = asyncHandler(async (req, _res, next) => {
+const authmiddleware = asyncHandler(async (req, _res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -27,4 +27,4 @@ const authMiddleware = asyncHandler(async (req, _res, next) => {
     }
 });
 
-export default authMiddleware;
+export default authmiddleware;

@@ -8,7 +8,7 @@ import {
     registerUser,
     resetPassword,
 } from "../controllers/authcontroller.js";
-import authMiddleware from "../middleware/authmiddleware.js";
+import authmiddleware from "../middleware/authmiddleware.js";
 
 const router = express.Router();
 
@@ -38,6 +38,6 @@ router.put(
     [body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters")],
     resetPassword
 );
-router.get("/me", authMiddleware, getCurrentUser);
+router.get("/me", authmiddleware, getCurrentUser);
 
 export default router;

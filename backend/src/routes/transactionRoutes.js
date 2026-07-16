@@ -12,7 +12,7 @@ import {
     getStatistics,
 } from "../controllers/transactionController.js";
 
-import authMiddleware from "../middleware/authMiddleware.js";
+import authMiddleware from "../middleware/authmiddleware.js";
 import validate from "../middleware/validate.js";
 import { transactionSchema } from "../validators/transactionValidation.js";
 
