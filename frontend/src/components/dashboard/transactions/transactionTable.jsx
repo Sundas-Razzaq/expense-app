@@ -1,5 +1,5 @@
 import EmptyState from "../../common/emptyState";
-import TransactionRow from "./TransactionRow";
+import TransactionRow from "./transactionRow";
 
 const TransactionTable = ({
     transactions,

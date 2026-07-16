@@ -1,5 +1,5 @@
-const AUTH_TOKEN_KEY = "taskmanager_auth_token";
-const AUTH_USER_KEY = "taskmanager_auth_user";
+const AUTH_TOKEN_KEY = "expense_auth_token";
+const AUTH_USER_KEY = "expense_auth_user";
 
 export const getStoredToken = () => {
     return window.localStorage.getItem(AUTH_TOKEN_KEY);
