@@ -37,7 +37,7 @@ button.button,
 .button--primary {
 	background: var(--color-primary);
 	color: #fff;
-	box-shadow: 0 8px 24px rgba(79, 70, 229, 0.18);
+	box-shadow: 0 8px 24px rgba(20, 48, 77, 0.22);
 }
 
 .button--primary:hover {
@@ -52,19 +52,19 @@ button.button,
 }
 
 .button--secondary:hover {
-	border-color: #cbd5e1;
-	background: #f8fafc;
+	border-color: #c7d1da;
+	background: var(--color-muted);
 }
 
 .button--danger {
-	border-color: rgba(239, 68, 68, 0.2);
-	background: rgba(239, 68, 68, 0.08);
-	color: #b91c1c;
+	border-color: rgba(199, 91, 69, 0.24);
+	background: var(--color-danger-soft);
+	color: var(--color-danger-text);
 }
 
 .button--danger:hover {
-	border-color: rgba(239, 68, 68, 0.26);
-	background: rgba(239, 68, 68, 0.12);
+	border-color: rgba(199, 91, 69, 0.32);
+	background: rgba(199, 91, 69, 0.16);
 }
 
 .button--ghost {
@@ -105,8 +105,8 @@ button.button,
 	width: 18px;
 	height: 18px;
 	border-radius: 999px;
-	border: 2px solid rgba(79, 70, 229, 0.18);
-	border-top-color: var(--color-primary);
+	border: 2px solid var(--color-accent-soft);
+	border-top-color: var(--color-accent);
 	animation: spin 0.9s linear infinite;
 }
 
@@ -131,7 +131,7 @@ button.button,
 	border-radius: 18px;
 	display: grid;
 	place-items: center;
-	background: rgba(79, 70, 229, 0.08);
+	background: var(--color-primary-soft);
 	color: var(--color-primary);
 }
 
@@ -152,7 +152,7 @@ button.button,
 .confirm-dialog-backdrop {
 	position: fixed;
 	inset: 0;
-	background: rgba(15, 23, 42, 0.55);
+	background: rgba(11, 32, 54, 0.55);
 	display: grid;
 	place-items: center;
 	padding: 18px;

@@ -15,8 +15,8 @@
 html {
 	min-height: 100%;
 	background:
-		radial-gradient(circle at top left, rgba(79, 70, 229, 0.08), transparent 35%),
-		radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 28%),
+		radial-gradient(circle at top left, rgba(20, 48, 77, 0.07), transparent 35%),
+		radial-gradient(circle at top right, rgba(31, 157, 85, 0.06), transparent 28%),
 		var(--color-background);
 }
 
@@ -54,10 +54,10 @@ button {
 }
 
 ::selection {
-	background: rgba(79, 70, 229, 0.18);
+	background: var(--color-accent-soft);
 }
 
 :focus-visible {
-	outline: 3px solid rgba(79, 70, 229, 0.28);
+	outline: 3px solid rgba(46, 125, 154, 0.35);
 	outline-offset: 2px;
 }

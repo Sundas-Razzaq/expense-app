@@ -47,15 +47,15 @@
 }
 
 .stats-card__icon--income {
-	background: linear-gradient(135deg, #10b981, #059669);
+	background: linear-gradient(135deg, #1f9d55, #167c43);
 }
 
 .stats-card__icon--expense {
-	background: linear-gradient(135deg, #ef4444, #dc2626);
+	background: linear-gradient(135deg, #c75b45, #a8462f);
 }
 
 .stats-card__icon--transactions {
-	background: linear-gradient(135deg, #4f46e5, #4338ca);
+	background: linear-gradient(135deg, #2e7d9a, #256780);
 }
 
 .analytics-panel + .analytics-panel {
@@ -75,7 +75,7 @@
 	padding: 14px 16px;
 	border: 1px solid var(--color-border);
 	border-radius: 14px;
-	background: #fff;
+	background: var(--color-surface);
 }
 
 .category-list__item strong,
@@ -95,7 +95,7 @@
 .monthly-overview__table thead th {
 	position: sticky;
 	top: 0;
-	background: #f8fafc;
+	background: var(--color-muted);
 	color: var(--color-text-secondary);
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
@@ -113,7 +113,7 @@
 
 .analytics-table tbody tr:hover,
 .monthly-overview__table tbody tr:hover {
-	background: rgba(79, 70, 229, 0.03);
+	background: rgba(20, 48, 77, 0.035);
 }
 
 .analytics-empty {
