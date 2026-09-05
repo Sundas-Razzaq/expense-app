@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import {
     getTransactions,
@@ -15,6 +16,7 @@ import Loader from "../../components/common/loader";
 import { resolveErrorMessage } from "../../utils/helpers";
 import "../../styles/dashboard.css";
 import "../../styles/transactions.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const TransactionsPage = () => {
     const [transactions, setTransactions] = useState([]);
@@ -73,6 +75,7 @@ const TransactionsPage = () => {
     const handleSubmit = async (transaction) => {
         try {
             setError("");
+            const creatingTransaction = !editingTransaction;
 
             if (editingTransaction) {
                 await updateTransaction(
@@ -86,8 +89,16 @@ const TransactionsPage = () => {
             }
 
             await loadTransactions();
+            toast.success(
+                creatingTransaction
+                    ? "Transaction added"
+                    : "Transaction updated"
+            );
+
+            return true;
         } catch (error) {
             setError(resolveErrorMessage(error));
+            return false;
         }
     };
 
@@ -134,34 +145,45 @@ const TransactionsPage = () => {
     }
 
     return (
-        <section className="transaction-page dashboard-stack">
-            <div>
-                <p className="dashboard-page__description">
-                    Create, search, filter, and manage your records with a clean table layout.
-                </p>
-            </div>
-
-            {error && <p className="auth-status auth-status--error">{error}</p>}
-
-            <TransactionForm
-                key={editingTransaction?._id ?? "create"}
-                editingTransaction={editingTransaction}
-                onSubmit={handleSubmit}
+        <>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                pauseOnHover
             />
 
-            <TransactionFilters
-                search={search}
-                setSearch={setSearch}
-                typeFilter={typeFilter}
-                setTypeFilter={setTypeFilter}
-            />
+            <section className="transaction-page dashboard-stack">
+                <div>
+                    <p className="dashboard-page__description">
+                        Create, search, filter, and manage your records with a clean table layout.
+                    </p>
+                </div>
 
-            <TransactionTable
-                transactions={filteredTransactions}
-                onEdit={setEditingTransaction}
-                onDelete={handleDelete}
-            />
-        </section>
+                {error && <p className="auth-status auth-status--error">{error}</p>}
+
+                <TransactionForm
+                    key={editingTransaction?._id ?? "create"}
+                    editingTransaction={editingTransaction}
+                    onSubmit={handleSubmit}
+                />
+
+                <TransactionFilters
+                    search={search}
+                    setSearch={setSearch}
+                    typeFilter={typeFilter}
+                    setTypeFilter={setTypeFilter}
+                />
+
+                <TransactionTable
+                    transactions={filteredTransactions}
+                    onEdit={setEditingTransaction}
+                    onDelete={handleDelete}
+                />
+            </section>
+        </>
     );
 };
 

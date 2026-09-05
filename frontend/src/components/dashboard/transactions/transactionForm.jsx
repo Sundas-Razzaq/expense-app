@@ -44,9 +44,9 @@ const TransactionForm = ({
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await onSubmit(formData);
+        const submissionSucceeded = await onSubmit(formData);
 
-        if (!editingTransaction) {
+        if (!editingTransaction && submissionSucceeded) {
             setFormData(getInitialState(null));
         }
     };

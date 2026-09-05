@@ -1,3 +1,9 @@
+const formatMonthName = (month) =>
+    new Date(2000, Number(month) - 1, 1).toLocaleString(
+        "en-US",
+        { month: "long" }
+    );
+
 const MonthlyOverview = ({
     monthlyData,
 }) => {
@@ -23,7 +29,7 @@ const MonthlyOverview = ({
                             {monthlyData.map((month) => (
                                 <tr key={`${month.year}-${month.month}`}>
                                     <td>{month.year}</td>
-                                    <td>{month.month}</td>
+                                    <td>{formatMonthName(month.month)}</td>
                                     <td>PKR {Number(month.income).toLocaleString()}</td>
                                     <td>PKR {Number(month.expense).toLocaleString()}</td>
                                 </tr>
